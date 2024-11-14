@@ -11,6 +11,7 @@
   "devDependencies": {
     "@types/node": "^22.9.0",
     "ts-node": "^10.9.2",
+    "tsconfig.json": "^1.0.11",
     "typescript": "^5.6.3"
   },
   "dependencies": {
@@ -18,7 +19,7 @@
     "inquirer": "^12.1.0"
   },
   "scripts": {
-    "build": "tsc",
+    "build": "tsc && node postbuild.js",
     "start": "ts-node src/index.ts"
   },
   "publishConfig": {
