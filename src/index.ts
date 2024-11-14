@@ -112,7 +112,7 @@ const tikz = `\\usepackage{tikz,pgfplots}
 \\usetikzlibrary{positioning,decorations.markings,calc,shapes.misc}
 `;
 
-const paren = `\\newcommand{\\vect}[3]{\\begin{bmatrix}#1\\\\#2\\\\#3 end{bmatrix}}
+const paren = `\\newcommand{\\vect}[3]{\\begin{bmatrix}#1\\\\#2\\\\#3 \\end{bmatrix}}
 \\newcommand{\\angled}[1]{\\langle{#1}\\rangle}
 \\newcommand{\\paren}[1]{\\left(#1\\right)}
 \\newcommand{\\sqb}[1]{\\left[#1\\right]}
@@ -133,7 +133,7 @@ const mathContentBlocks = `\\newtheorem{lemma}{Lemma}
 \\crefname{observation}{Observation}{Observations}
 \\crefname{definition}{Definition}{Definition}`;
 
-const watermark = `
+const watermark = `\\usepackage{draftwatermark}
 \\SetWatermarkText{timthedev07 | 2025}
 \\SetWatermarkScale{3}
 \\SetWatermarkColor[gray]{0.97}`;
@@ -297,8 +297,8 @@ ${withoutUsepackage.join("\n")}`;
   } = response;
 
   let document = `${lang(language)}
-  ${basePackages}
-  `;
+${basePackages}
+`;
   if (isMath) {
     document += mathPackages + "\n" + mathContentBlocks + "\n";
   }
@@ -324,9 +324,9 @@ ${withoutUsepackage.join("\n")}`;
 
   console.log(chalk.magenta("\n\n----------------\n\n"));
 
-  document = gatherUsepackage(document);
+  document = gatherUsepackage(document) + "\n";
 
-  document += docStart(title, author);
+  document += docStart(title, author) + "\n\n" + "\\end{document}" + "\n";
 
   try {
     await writeFile(`./${filename}.tex`, document);
