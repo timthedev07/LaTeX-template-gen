@@ -1,0 +1,23 @@
+{
+  "name": "@dev07/latex-template-generator",
+  "version": "1.0.0",
+  "description": "My LaTeX Template Generator",
+  "main": "dist/index.js",
+  "bin": "dist/index.js",
+  "repository": "https://github.com/timthedev07/LaTeX-template-gen",
+  "author": "<Tim Bao timpersonal07@gmail.com>",
+  "license": "GPL-3.0-only",
+  "private": false,
+  "devDependencies": {
+    "@types/node": "^22.9.0",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.6.3"
+  },
+  "dependencies": {
+    "inquirer": "^12.1.0"
+  },
+  "scripts": {
+    "build": "tsc",
+    "start": "ts-node src/index.ts"
+  }
+}
