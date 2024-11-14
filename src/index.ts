@@ -3,7 +3,6 @@ import chalk from "chalk";
 import { writeFile, readdir, mkdir } from "fs/promises";
 
 type Language = "Chinese" | "English";
-
 const lang = (lang: Language) => {
   switch (lang) {
     case "Chinese":
