@@ -1,7 +1,7 @@
 {
   "name": "@dev07/latex-template-generator",
   "version": "1.0.0",
-  "description": "My LaTeX Template Generator",
+  "description": "My Customized LaTeX Template Generator",
   "main": "dist/index.js",
   "bin": "dist/index.js",
   "repository": "https://github.com/timthedev07/LaTeX-template-gen",
