@@ -151,7 +151,7 @@ const docStart = (title: string, author: string) => `\\begin{document}
 \\begin{titlepage}
   \\begin{center}
     \\vspace*{8cm}
-    {\\Large {${title}}} \\
+    {\\Large {${title}}} \\\\
     \\vspace*{1.2cm}
     \\large{By ${author}}
   \\end{center}
@@ -163,7 +163,15 @@ const docStart = (title: string, author: string) => `\\begin{document}
 
 \\clearpage
 \\setcounter{page}{1}
-\\addtocontents{toc}{\\protect\\thispagestyle{empty}}`;
+\\addtocontents{toc}{\\protect\\thispagestyle{empty}}
+\\pagebreak`;
+
+const sectionalPageBreakStr = `\\let\\oldsection\\section
+\\renewcommand\\section{\\clearpage\\oldsection}
+`;
+
+const doubleSpacingStr = `\\doublespacing
+`;
 
 const colorBoxes = `
 \\usepackage[most]{tcolorbox}
@@ -207,6 +215,8 @@ ${withoutUsepackage.join("\n")}`;
     noIndent: boolean;
     hasWatermark: boolean;
     filename: string;
+    sectionalPageBreak: boolean;
+    doubleSpacing: boolean;
   }>([
     {
       type: "input",
@@ -279,6 +289,18 @@ ${withoutUsepackage.join("\n")}`;
       message: "Does the document have a watermark?",
       default: false,
     },
+    {
+      type: "confirm",
+      name: "sectionalPageBreak",
+      message: "Breaks the page after each section?",
+      default: true,
+    },
+    {
+      type: "confirm",
+      name: "doubleSpacing",
+      message: "Double spacing?",
+      default: true,
+    },
   ]);
 
   const {
@@ -293,6 +315,8 @@ ${withoutUsepackage.join("\n")}`;
     noIndent,
     hasWatermark,
     filename,
+    sectionalPageBreak,
+    doubleSpacing,
   } = response;
 
   let document = `${lang(language)}
@@ -319,6 +343,12 @@ ${basePackages}
   }
   if (usesColorBoxes) {
     document += colorBoxes + "\n";
+  }
+  if (sectionalPageBreak) {
+    document += sectionalPageBreakStr + "\n";
+  }
+  if (doubleSpacing) {
+    document += doubleSpacingStr + "\n";
   }
 
   console.log(chalk.magenta("\n\n----------------\n\n"));
